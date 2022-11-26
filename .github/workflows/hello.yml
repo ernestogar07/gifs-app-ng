@@ -1,12 +1,24 @@
-name: Prueba Hello
+name: Deployment Pipeline - DevStef
 on:
   push:
     branches:
       - dev-stefano
+
 jobs:
-  hello_world:
-    runs-on: ubuntu-18.04
+  deploy:
+    runs-on: windows-latest
     steps:
-      - name: Echo the message
-        run: |
-          echo "Hola tephano!"
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install --no audit --no-fund --no-optional
+      - name: Lint
+        run: npm run lint  
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
