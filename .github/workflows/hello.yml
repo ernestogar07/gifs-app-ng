@@ -2,7 +2,7 @@ name: Prueba Hello
 on:
   push:
     branches:
-      - main
+      - dev-stefano
 jobs:
   hello_world:
     runs-on: ubuntu-18.04
