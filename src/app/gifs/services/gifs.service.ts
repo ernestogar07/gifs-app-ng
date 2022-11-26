@@ -30,7 +30,7 @@ export class GifsService {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
       .set('q', query)
-      .set('limit', 50);
+      .set('limit', 60);
     this.http
       .get<SearchGifResponse>(`${this.giphyBaseUrl}/search`, { params })
       .subscribe((resp) => {
