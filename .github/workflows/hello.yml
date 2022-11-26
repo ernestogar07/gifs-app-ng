@@ -2,7 +2,7 @@ name: Deployment Pipeline - DevStef
 on:
   push:
     branches:
-      - dev-stefano
+      - dev-darian
 
 jobs:
   deploy:
