@@ -22,3 +22,8 @@ jobs:
         run: npm run build
       - name: Test
         run: npm test
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with:
+          image: darianganz/gifs-app-ng
+          registry: docker.io
