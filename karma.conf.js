@@ -35,10 +35,13 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
+    // logLevel: config.LOG_INFO,
+    // autoWatch: true,
+    // singleRun: false,
+    autoWatch: false,
+    singleRun: true,
+    browserNoActivityTimeout: 40000,
     restartOnFileChange: true
   });
 };
