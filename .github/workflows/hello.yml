@@ -1,31 +1,46 @@
-name: Deployment Pipeline - DevStef
+name: Main Pipeline
 on:
   push:
     branches:
-      - dev-stefano
+    - dev-stefano
 
 jobs:
-  deploy:
+  code_build:
+    name: Code build
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm install --no audit --no-fund --no-optional
-      - name: Lint
-        run: npm run lint  
-      - name: Build
-        run: npm run build
-      - name: Test
-        run: npm test
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: npm install --no audit --no-fund --no-optional
+    - name: Lint
+      run: npm run lint  
+    - name: Build
+      run: npm run build
+
+  unit_test:
+    name: Unit testing
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: npm install --no audit --no-fund --no-optional
+    - name: Test
+      run: npm test
+
   generate_artifact:
     name: Generate artifact
     needs: static_code_analysis
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     environment: development
     steps:
     - name: Checkout source code
