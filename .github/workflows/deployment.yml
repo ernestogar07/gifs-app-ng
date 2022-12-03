@@ -117,3 +117,5 @@ jobs:
              k8s-manifest/service.yaml
           images: 'ernestogar07/gifsapp:development'
           pull: false
+      - name: Actualizar Despliegue
+        run: kubectl rollout restart deployment gifsapp -n development
