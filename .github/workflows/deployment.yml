@@ -2,7 +2,7 @@ name: Main Pipeline
 on:
   push:
     branches:
-    - dev-stefano
+    - development
 
 jobs:
   code_build:
@@ -114,5 +114,5 @@ jobs:
              k8s-manifest/deployment.yaml
              k8s-manifest/ingress-dev.yaml
              k8s-manifest/service.yaml
-          images: 'ernestogar07/gifsapp:dev-stefano'
+          images: 'ernestogar07/gifsapp:development'
           pull: false
