@@ -7,7 +7,7 @@ on:
 jobs:
   code_build:
     name: Code build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -24,7 +24,7 @@ jobs:
 
   unit_test:
     name: Unit testing
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -40,7 +40,7 @@ jobs:
   static_code_analysis:
     name: Static code analysis
     needs: [code_build, unit_test]
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
@@ -58,7 +58,7 @@ jobs:
   generate_artifact:
     name: Generate artifact
     needs: static_code_analysis
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     environment: development
     steps:
     - name: Checkout source code
