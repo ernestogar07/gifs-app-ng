@@ -82,3 +82,37 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+  deploy_development:
+    name: Deploy to development
+    needs: generate_artifact
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Checkout source code 
+        uses: actions/checkout@v3
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: 'RGEUK8S' 
+          cluster-name: 'DEMOK8S'
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'development'
+          manifests: |
+             k8s-manifest/deployment.yaml
+             k8s-manifest/ingress-dev.yaml
+             k8s-manifest/service.yaml
+          images: 'ernestogar07/gifsapp:dev-stefano'
+          pull: false
