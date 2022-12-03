@@ -47,6 +47,8 @@ jobs:
     steps:
     - name: Checkout source code
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Static code analysis with ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -63,6 +65,8 @@ jobs:
     steps:
     - name: Checkout source code
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Build application
       run: npm install && npm run build --if-present
     - name: Log in to Docker Hub
@@ -91,6 +95,8 @@ jobs:
     steps:
       - name: Checkout source code 
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Azure login
         id: login
         uses: azure/login@v1.4.3
