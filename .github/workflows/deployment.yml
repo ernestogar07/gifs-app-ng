@@ -37,6 +37,24 @@ jobs:
     - name: Test
       run: npm test
 
+  static_code_analysis:
+    name: Static code analysis
+    needs: [code_build, unit_test]
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+    - name: Static code analysis with ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Code analysis
+      run: echo "Static code analysis"
+
   generate_artifact:
     name: Generate artifact
     needs: static_code_analysis
