@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demok8s-dns-82cd1ef6.hcp.eastus.azmk8s.io
+  - host: gifsapp-dev.10.244.0.11.nip.io
     http:
       paths:
       - path: /
