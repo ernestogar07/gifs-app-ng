@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gifsapp
+spec:
+  selector:
+    matchLabels:
+      name: gifsapp
+  template:
+    metadata:
+      labels:
+        name: gifsapp
+    spec:
+      containers:
+        - image: ernestogar07/gifsapp
+          name: gifsapp
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
