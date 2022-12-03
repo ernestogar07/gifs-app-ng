@@ -24,22 +24,18 @@ jobs:
 
   unit_test:
     name: Unit testing
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
+    runs-on: windows-latest
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v3
-    - name: Testing with ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@v3
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        fetch-depth: 0  
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
     - name: Install dependencies
-      run: npm install
-    - name: Execute unit testing
-      run: echo "Test"
+      run: npm install --no audit --no-fund --no-optional
+    - name: Test
+      run: npm test
 
   static_code_analysis:
     name: Static code analysis
