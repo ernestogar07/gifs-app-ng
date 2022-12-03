@@ -14,6 +14,7 @@ export class SidebarComponent {
 
   BuscarGif(item: string){
     this.gifsService.obtenerGifs(item);
+    console.log("Obtiene gifs.");
   }
 
   EliminarBusqueda(index: number){
